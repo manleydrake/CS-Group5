@@ -2,16 +2,16 @@ from flask import Flask
 from flask import render_template
 app = Flask(__name__)
 
-@app.route('/')
-def hello():
-	return '<h1>Hello from Flask!</h1>'
+@app.route('/home')
+def Welcome():
+	return render_template('home.html')
 
 @app.route('/about')
-def about ():
-	return '<h2>Ab about page!</h2>'
+def about():
+	return render_template('about.html')
 
-@app.route("/hello/<id>/")
-def hello_user(id):
+@app.route("/movie/<id>/")
+def movie(id):
 	return render_template('layout.html', title = id)
 
 # these two lines of code should always be the last in the file
