@@ -1,0 +1,94 @@
+@charset "utf-8";
+
+html {
+   background: rgb(32, 191, 224);
+   font-family: Verdana, Geneva, sans-serif;
+   font-size: 12px;
+}
+
+img#cover {
+  	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+  	object-fit: cover;
+   	border-radius: 8px;
+   	padding: 20% 20%;
+}
+
+.button {
+		padding: 40% 40%;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 36px;
+		margin: 4px 2px;
+		transition-duration: 0.4s;
+		cursor: pointer;  
+		overflow: hidden;
+}
+
+.yes {
+		border-radius: 12px;
+		width: 85%;
+		background-color: white;
+		color: black;
+		border: 2px solid green;
+}
+
+.no {
+		border-radius: 12px;
+		width: 85%;
+		background-color: white;
+		color: black;
+		border: 2px solid red;
+}
+
+.yes:hover {
+	background-color: green;
+	color: white;
+	border: 2px solid black;
+}
+
+		
+
+.no:hover {
+	background-color: red;
+	color: white;
+	border: 2px solid black;
+}
+
+
+.column {
+  float: left;
+}
+
+/* Left and right column */
+.column.side {
+  width: 40%;
+}
+
+p {
+	margin: 50px;
+}
+
+table {
+	margin: 50px;
+}
+
+/* Middle column */
+.column.middle {
+  width: 20%;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1000px) {
+  .column.side, .column.middle {
+    width: 100%;
+  }
+  
+
+  /* This is not working, tried as a test to make buttons smaller on mobile view */
+  button {
+  	font-size: 12px;
+  }
+}
