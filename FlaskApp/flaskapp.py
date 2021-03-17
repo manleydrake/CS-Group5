@@ -25,6 +25,12 @@ def get_time(id):
 	time = df.iloc[0]["runtimeMinutes"]
 	return time
 
+def get_year(id):
+	df = pandas.read_csv("data.csv", sep=",")
+	df = df[df["tconst"] == id]
+	year = df.iloc[0]["startYear"]
+	return year
+
 @app.route('/home')
 def Welcome():
 	return render_template('home.html')
@@ -36,7 +42,7 @@ def about():
 @app.route("/movie")
 def movie():
 	m_id = new_movie()
-	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id))
+	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id), m_year = get_year(m_id))
 
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':
