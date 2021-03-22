@@ -8,9 +8,13 @@ app = Flask(__name__)
 
 def new_movie():
 	df = pandas.read_csv("data.csv", sep=",")
+	hist = pandas.read_csv("history.csv", sep = ",")
 	nrows = len(df.index)
 	row = random.randint(0, nrows)
 	id = df.iloc[row][0]
+	new_row = pandas.DataFrame([id], columns=list('A'))
+	hist = hist.append(new_row, ignore_index = True)
+	hist.to_csv("history.csv", index = False)
 	return id
 
 def get_title(id):
