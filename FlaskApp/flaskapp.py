@@ -9,6 +9,8 @@ app = Flask(__name__)
 def new_movie():
 	df = pandas.read_csv("data.csv", sep=",")
 	hist = pandas.read_csv("history.csv", sep = ",")
+	if hist.shape[0] == 10:
+		return "stop"
 	nrows = len(df.index)
 	row = random.randint(0, nrows)
 	id = df.iloc[row][0]
@@ -46,6 +48,12 @@ def about():
 @app.route("/movie")
 def movie():
 	m_id = new_movie()
+	if m_id == "stop":
+		end = pandas.read_csv("history.csv", sep = ",")
+		end.to_csv("end.csv", index = False)
+		start = pandas.read_csv("start.csv", sep = ",")
+		start.to_csv("history.csv", index = False)
+		return render_template('end.html')
 	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id), m_year = get_year(m_id))
 
 # these two lines of code should always be the last in the file
