@@ -51,7 +51,7 @@ def movie():
 	m_id = new_movie("None")
 	if m_id == "stop":
 		end = pandas.read_csv("history.csv", sep = ",")
-		end.to_csv("end.csv", index = False)
+		end.to_csv("templates/data.csv", index = False)
 		start = pandas.read_csv("start.csv", sep = ",")
 		start.to_csv("history.csv", index = False)
 		return render_template('end.html')
@@ -62,7 +62,7 @@ def movieY():
 	m_id = new_movie("Yes")
 	if m_id == "stop":
 		end = pandas.read_csv("history.csv", sep = ",")
-		end.to_csv("end.csv", index = False)
+		end.to_csv("templates/data.csv", index = False)
 		start = pandas.read_csv("start.csv", sep = ",")
 		start.to_csv("history.csv", index = False)
 		return render_template('end.html')
@@ -73,7 +73,7 @@ def movieN():
 	m_id = new_movie("No")
 	if m_id == "stop":
 		end = pandas.read_csv("history.csv", sep = ",")
-		end.to_csv("end.csv", index = False)
+		end.to_csv("templates/data.csv", index = False)
 		start = pandas.read_csv("start.csv", sep = ",")
 		start.to_csv("history.csv", index = False)
 		return render_template('end.html')
