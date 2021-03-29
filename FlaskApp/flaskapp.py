@@ -23,20 +23,56 @@ def new_movie(prev):
 def get_title(id):
 	df = pandas.read_csv("data.csv", sep=",")
 	df = df[df["tconst"] == id]
-	title = df.iloc[0]["primaryTitle"]
+	title = df.iloc[0]["original_title"]
 	return title
 
 def get_time(id):
 	df = pandas.read_csv("data.csv", sep=",")
 	df = df[df["tconst"] == id]
-	time = df.iloc[0]["runtimeMinutes"]
+	time = df.iloc[0]["duration"]
 	return time
 
 def get_year(id):
 	df = pandas.read_csv("data.csv", sep=",")
 	df = df[df["tconst"] == id]
-	year = df.iloc[0]["startYear"]
+	year = df.iloc[0]["year"]
 	return year
+
+def get_desc(id):
+	df = pandas.read_csv("data.csv", sep=",")
+	df = df[df["tconst"] == id]
+	desc = df.iloc[0]["description"]
+	return desc
+
+def get_director(id):
+	df = pandas.read_csv("data.csv", sep=",")
+	df = df[df["tconst"] == id]
+	director = df.iloc[0]["director"]
+	return director
+
+def get_writer(id):
+	df = pandas.read_csv("data.csv", sep=",")
+	df = df[df["tconst"] == id]
+	writer = df.iloc[0]["writer"]
+	return writer
+
+def get_votes(id):
+	df = pandas.read_csv("data.csv", sep=",")
+	df = df[df["tconst"] == id]
+	votes = df.iloc[0]["avg_vote"]
+	return votes
+
+def get_genre(id):
+	df = pandas.read_csv("data.csv", sep=",")
+	df = df[df["tconst"] == id]
+	genre = df.iloc[0]["genre"]
+	return genre
+
+def get_image(id):
+	df = pandas.read_csv("data.csv", sep=",")
+	df = df[df["tconst"] == id]
+	url = df.iloc[0]["imageurls"]
+	return url
 
 @app.route('/home')
 def Welcome():
@@ -55,7 +91,7 @@ def movie():
 		start = pandas.read_csv("start.csv", sep = ",")
 		start.to_csv("history.csv", index = False)
 		return render_template('end.html')
-	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id), m_year = get_year(m_id))
+	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id), m_year = get_year(m_id), m_desc = get_desc(m_id), m_director = get_director(m_id), m_writer = get_writer(m_id), m_votes = get_votes(m_id), m_genre = get_genre(m_id), m_url = get_image(m_id))
 
 @app.route("/yes")
 def movieY():
@@ -66,7 +102,7 @@ def movieY():
 		start = pandas.read_csv("start.csv", sep = ",")
 		start.to_csv("history.csv", index = False)
 		return render_template('end.html')
-	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id), m_year = get_year(m_id))
+	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id), m_year = get_year(m_id), m_desc = get_desc(m_id), m_director = get_director(m_id), m_writer = get_writer(m_id), m_votes = get_votes(m_id), m_genre = get_genre(m_id), m_url = get_image(m_id))
 
 @app.route("/no")
 def movieN():
@@ -77,7 +113,7 @@ def movieN():
 		start = pandas.read_csv("start.csv", sep = ",")
 		start.to_csv("history.csv", index = False)
 		return render_template('end.html')
-	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id), m_year = get_year(m_id))
+	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id), m_year = get_year(m_id), m_desc = get_desc(m_id), m_director = get_director(m_id), m_writer = get_writer(m_id), m_votes = get_votes(m_id), m_genre = get_genre(m_id), m_url = get_image(m_id))
 
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':

@@ -66,10 +66,11 @@ img#cover {
 .column.side {
   width: 40%;
 }
-
+/*
 p {
-	margin: 50px;
+	margin: 20px;
 }
+*/
 
 table {
 	margin: 50px;
