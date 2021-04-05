@@ -115,6 +115,14 @@ def movieN():
 		return render_template('end.html')
 	return render_template('layout.html', m_title = get_title(m_id), m_time = get_time(m_id), m_year = get_year(m_id), m_desc = get_desc(m_id), m_director = get_director(m_id), m_writer = get_writer(m_id), m_votes = get_votes(m_id), m_genre = get_genre(m_id), m_url = get_image(m_id))
 
+@app.route("/restart")
+def restart():
+	end = pandas.read_csv("history.csv", sep = ",")
+	end.to_csv("templates/data.csv", index = False)
+	start = pandas.read_csv("start.csv", sep = ",")
+	start.to_csv("history.csv", index = False)
+	return render_template('home.html')
+
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':
 	app.run(debug=True)
