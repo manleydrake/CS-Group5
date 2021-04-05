@@ -123,6 +123,15 @@ def restart():
 	start.to_csv("history.csv", index = False)
 	return render_template('home.html')
 
+@app.route("/EndNow")
+def EndNow():
+	end = pandas.read_csv("history.csv", sep = ",")
+	end.to_csv("templates/data.csv", index = False)
+	start = pandas.read_csv("start.csv", sep = ",")
+	start.to_csv("history.csv", index = False)
+	return render_template('end.html')
+
+
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':
 	app.run(debug=True)
