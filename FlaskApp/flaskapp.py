@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 import pandas
 import random
+from flask import request
 
 
 app = Flask(__name__)
@@ -76,7 +77,22 @@ def get_image(id):
 
 @app.route('/home')
 def Welcome():
+	base = pandas.read_csv("base.csv", sep = ",")
+	base.to_csv("data.csv", index = False)
 	return render_template('home.html')
+
+@app.route('/filter1')
+def year_filter():
+    return render_template('year.html')
+
+@app.route('/filter1', methods=['POST'])
+def year_filter_post():
+	text = request.form['text']
+	value = text.upper()
+	data = pandas.read_csv("data.csv", sep = ",")
+	data = data[data["year"] >= int(value)]
+	data.to_csv("data.csv", index = False)
+	return render_template('ready.html')
 
 @app.route('/about')
 def about():
