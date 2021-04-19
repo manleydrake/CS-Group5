@@ -152,6 +152,11 @@ def EndNow():
 	start.to_csv("history.csv", index = False)
 	return render_template('end.html')
 
+@app.route("/results")
+def Results():
+	final = pandas.read_csv("templates/data.csv", sep = ",")
+	
+
 
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':
