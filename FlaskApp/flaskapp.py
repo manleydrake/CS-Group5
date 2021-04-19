@@ -152,7 +152,7 @@ def EndNow():
 	start.to_csv("history.csv", index = False)
 	return render_template('end.html')
 
-@app.route("/results")
+#@app.route("/results")
 #def Results():
 #	final = pandas.read_csv("templates/data.csv", sep = ",")
 # SEE MY TEST PYTHON FILES FOR THIS SECTION	
