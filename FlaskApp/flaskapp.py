@@ -153,9 +153,9 @@ def EndNow():
 	return render_template('end.html')
 
 @app.route("/results")
-def Results():
-	final = pandas.read_csv("templates/data.csv", sep = ",")
-	
+#def Results():
+#	final = pandas.read_csv("templates/data.csv", sep = ",")
+# SEE MY TEST PYTHON FILES FOR THIS SECTION	
 
 
 # these two lines of code should always be the last in the file
