@@ -152,11 +152,17 @@ def EndNow():
 	start.to_csv("history.csv", index = False)
 	return render_template('end.html')
 
-#@app.route("/results")
-#def Results():
-#	final = pandas.read_csv("templates/data.csv", sep = ",")
-# SEE MY TEST PYTHON FILES FOR THIS SECTION	
-
+@app.route("/results")
+def Results():
+	df = pandas.read_csv("/Users/matth/Desktop/CS-Group5/FlaskApp/templates/data.csv", sep = ",")
+	df = df.iloc[1: , :]
+	df = df[df["B"] == "Yes"]
+	df = df.rename(columns = {'A':'tconst'})
+	df2 = pandas.read_csv("/Users/matth/Desktop/CS-Group5/FlaskApp/base.csv", sep = ",")
+	df = df.merge(df2, on='tconst', how='left')
+	df = df[['original_title', 'year', 'genre', 'duration', 'avg_vote']]
+	df = df.rename(columns = {'original_title':'Title', 'year':'Year', 'genre':'Genre', 'duration':'Runtime', 'avg_vote':'Average Votes'})
+	return render_template('results.html', data = df.to_html())
 
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':
