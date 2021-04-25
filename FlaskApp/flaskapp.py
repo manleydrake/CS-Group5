@@ -11,7 +11,7 @@ def new_movie(prev):
 	df = pandas.read_csv("data.csv", sep=",")
 	hist = pandas.read_csv("history.csv", sep = ",")
 	hist.at[len(hist.index)-1, 'B'] = prev
-	if hist.shape[0] == 10:
+	if hist.shape[0] == 11: #should run for 10 movies
 		return "stop"
 	nrows = len(df.index)
 	row = random.randint(0, nrows)
@@ -118,6 +118,9 @@ def movie():
 def movieY():
 	m_id = new_movie("Yes")
 	if m_id == "stop":
+		hist = pandas.read_csv("history.csv", sep = ",")
+		hist.at[len(hist.index)-1, 'B'] = "Yes"
+		hist.to_csv("history.csv", index = False)
 		end = pandas.read_csv("history.csv", sep = ",")
 		end.to_csv("templates/data.csv", index = False)
 		start = pandas.read_csv("start.csv", sep = ",")
@@ -129,6 +132,9 @@ def movieY():
 def movieN():
 	m_id = new_movie("No")
 	if m_id == "stop":
+		hist = pandas.read_csv("history.csv", sep = ",")
+		hist.at[len(hist.index)-1, 'B'] = "No"
+		hist.to_csv("history.csv", index = False)
 		end = pandas.read_csv("history.csv", sep = ",")
 		end.to_csv("templates/data.csv", index = False)
 		start = pandas.read_csv("start.csv", sep = ",")
