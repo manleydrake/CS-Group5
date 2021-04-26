@@ -168,6 +168,8 @@ def Results():
 	df = df.merge(df2, on='tconst', how='left')
 	df = df[['original_title', 'year', 'genre', 'duration', 'avg_vote']]
 	df = df.rename(columns = {'original_title':'Title', 'year':'Year', 'genre':'Genre', 'duration':'Runtime', 'avg_vote':'Average Votes'})
+	if df.empty:
+		return render_template('no_results.html')
 	return render_template('results.html', data = df.to_html())
 
 # these two lines of code should always be the last in the file
