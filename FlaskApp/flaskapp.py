@@ -160,14 +160,22 @@ def EndNow():
 
 @app.route("/results")
 def Results():
-	df = pandas.read_csv("/Users/matth/Desktop/CS-Group5/FlaskApp/templates/data.csv", sep = ",")
+	df = pandas.read_csv("templates/data.csv", sep = ",")
 	df = df.iloc[1: , :]
 	df = df[df["B"] == "Yes"]
 	df = df.rename(columns = {'A':'tconst'})
-	df2 = pandas.read_csv("/Users/matth/Desktop/CS-Group5/FlaskApp/base.csv", sep = ",")
+	df2 = pandas.read_csv("base.csv", sep = ",")
 	df = df.merge(df2, on='tconst', how='left')
-	df = df[['original_title', 'year', 'genre', 'duration', 'avg_vote']]
-	df = df.rename(columns = {'original_title':'Title', 'year':'Year', 'genre':'Genre', 'duration':'Runtime', 'avg_vote':'Average Votes'})
+	df = df[['original_title', 'year', 'genre', 'duration', 'avg_vote', 'linktowatch']]
+	
+	def make_clickable(url):
+		return '<a href="{}" rel = "nopener noreferrer" target="_blank"></a>'.format(url)
+
+	df['linktowatch'] = df.apply(lambda x: make_clickable(x['linktowatch']), axis = 1)
+
+	df = df.rename(columns = {'original_title':'Title', 'year':'Year', 'genre':'Genre', 'duration':'Runtime', 'avg_vote':'Average Votes', 'linktowatch':'Watch Here'})
+	
+
 	if df.empty:
 		return render_template('no_results.html')
 	return render_template('results.html', data = df.to_html())
