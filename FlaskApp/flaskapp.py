@@ -169,16 +169,17 @@ def Results():
 	df = df[['original_title', 'year', 'genre', 'duration', 'avg_vote', 'linktowatch']]
 	
 	def make_clickable(url):
-		return '<a href="{}" rel = "nopener noreferrer" target="_blank"></a>'.format(url)
+		return f'<a target = "_blank" href = "{url}">Watch Here</a>'
 
-	df['linktowatch'] = df.apply(lambda x: make_clickable(x['linktowatch']), axis = 1)
+	#df['linktowatch'] = df.apply(lambda x: make_clickable(x['linktowatch']), axis = 1)
+	df['linktowatch'] = df.apply(lambda x: "Not Found" if x['linktowatch'] is None  else make_clickable(x['linktowatch']), axis = 1)
 
 	df = df.rename(columns = {'original_title':'Title', 'year':'Year', 'genre':'Genre', 'duration':'Runtime', 'avg_vote':'Average Votes', 'linktowatch':'Watch Here'})
 	
 
 	if df.empty:
 		return render_template('no_results.html')
-	return render_template('results.html', data = df.to_html())
+	return render_template('results.html', data = df.to_html(escape = False))
 
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':
