@@ -91,11 +91,15 @@ def year_filter_post():
 	value = text.upper()
 	text1 = request.form['text1']
 	value1 = text1.upper()
+	text2 = request.form['text2']
+	value2 = text2.upper()
 	data = pandas.read_csv("data.csv", sep = ",")
 	if value != "":
 		data = data[data["year"] >= int(value)]
 	if value1 != "":	
 		data = data[data["duration"] <= int(value1)]
+	if value2 != "":	
+		data = data[data["avg_vote"] >= float(value2)]
 	data.to_csv("data.csv", index = False)
 	return render_template('ready.html')
 
