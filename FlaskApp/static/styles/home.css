@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 html {
-   background: rgb(225, 0, 0);
+   background: blue;	
    font-family: Verdana, Geneva, sans-serif;
    font-size: 12px;
 }
